@@ -122,7 +122,10 @@ class VIFMigrateData(obj_base.NovaObject):
         vif_mig_data = []
 
         for vif in vifs:
-            mig_vif = cls(port_id=vif['id'], source_vif=vif)
+            # Ensure to populate the profile filed, otherwise it
+            # will be lost during port binding in conductor.
+            mig_vif = cls(port_id=vif['id'],
+                          source_vif=vif, profile=vif['profile'])
             vif_mig_data.append(mig_vif)
         return vif_mig_data
 

@@ -267,6 +267,8 @@ class TestVIFMigrateData(test.NoDBTestCase):
         self.assertEqual(len(vifs), len(mig_vifs))
         self.assertEqual([vif['id'] for vif in vifs],
                          [mig_vif.port_id for mig_vif in mig_vifs])
+        self.assertEqual([vif['profile'] for vif in vifs],
+                         [mig_vif.profile for mig_vif in mig_vifs])
 
     def test_supports_os_vif_delegation(self):
         # first try setting on a object without 'profile' defined
